@@ -11,17 +11,22 @@ namespace ConexionBD
             Console.WriteLine("=====================================");
             Console.WriteLine("");
 
+
+
             EmployeeDAL getEmployees = new EmployeeDAL();
             JobDAL getJob = new JobDAL();
+
+            DependentDAL getDependent = new DependentDAL();
+
             List<Employee> employees = new List<Employee>();
             employees = getEmployees.GetEmployee();
 
-            List<Job>? jobs = new List<Job>();
-            jobs = getJob.GetJob();
+            List<Dependent>? dependents= new List<Dependent>();
+            dependents = getDependent.GetDependent();
 
-            foreach (Job job  in jobs)
+            foreach (Dependent dependent in dependents)
             {
-                Console.WriteLine("Job: {0}", job.Job_title.ToString());
+                Console.WriteLine("Dependent: {0}", dependent.First_name.ToString());
             }
 
         }
