@@ -4,8 +4,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConexionBD.Models;
 
-namespace ConexionBD
+namespace ConexionBD.DALs
 {
     public class EmployeeDAL
     {
@@ -18,7 +19,7 @@ namespace ConexionBD
         {
             try
             {
-                String query = "INSERT INTO dbo.employees" +
+                string query = "INSERT INTO dbo.employees" +
                 "(first_name,last_name,email,phone_number,hire_date,job_id,salary,manager_id,department_id) " +
                 "VALUES (@first_name,@last_name,@email,@phone_number,@hire_date,@job_id,@salary,@manager_id,@department_id)";
 
@@ -36,20 +37,20 @@ namespace ConexionBD
                 command.ExecuteNonQuery();
                 conn.Close();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 throw;
             }
-            
+
         }
 
         public List<Employee> GetEmployee()
         {
             List<Employee> employees = new List<Employee>();
-            try 
+            try
             {
-                String query = "SELECT * FROM dbo.employees";
+                string query = "SELECT * FROM dbo.employees";
                 SqlCommand command = new SqlCommand(query, conn.Connex);
                 conn.Open();
                 SqlDataReader records = command.ExecuteReader();
@@ -66,14 +67,14 @@ namespace ConexionBD
                     int? manager_id = records.IsDBNull(8) ? null : records.GetInt32(8);
                     int? deparment_id = records.IsDBNull(8) ? null : records.GetInt32(8);
 
-                    Employee employeeGet = new Employee(employee_id, first_name, last_name, email, phone_number, 
+                    Employee employeeGet = new Employee(employee_id, first_name, last_name, email, phone_number,
                         hire_date, job_id, salary, manager_id, deparment_id);
                     employees?.Add(employeeGet);
                 }
 
                 records.Close();
                 conn.Close();
-            } 
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -81,7 +82,7 @@ namespace ConexionBD
             }
 
             return employees;
-
         }
+
     }
 }

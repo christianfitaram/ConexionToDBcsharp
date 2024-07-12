@@ -1,4 +1,7 @@
-﻿namespace ConexionBD
+﻿using ConexionBD.DALs;
+using ConexionBD.Models;
+
+namespace ConexionBD
 {
     internal class Program
     {
@@ -9,13 +12,16 @@
             Console.WriteLine("");
 
             EmployeeDAL getEmployees = new EmployeeDAL();
+            JobDAL getJob = new JobDAL();
             List<Employee> employees = new List<Employee>();
             employees = getEmployees.GetEmployee();
 
-           
-            foreach (Employee employee in employees)
+            List<Job>? jobs = new List<Job>();
+            jobs = getJob.GetJob();
+
+            foreach (Job job  in jobs)
             {
-                Console.WriteLine("Empleado: {0}, {1}", employee.First_name, employee.Last_name);
+                Console.WriteLine("Job: {0}", job.Job_title.ToString());
             }
 
         }
